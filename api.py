@@ -75,7 +75,7 @@ class Api:
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Process some integers.")
+    parser = argparse.ArgumentParser(description="Get List of Bin Collections for UPRN")
     parser.add_argument(
         "--uprn", type=int, help="Unique Property Reference Number", required=True
     )
