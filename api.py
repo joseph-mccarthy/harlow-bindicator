@@ -1,7 +1,9 @@
 import bs4
-from requests_html import HTMLSession
 from dataclasses import dataclass
 import datetime
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 
 
 @dataclass
@@ -38,11 +40,32 @@ class Api:
 
     def get_data(self):
         data_url = f"{self.url}{self.uprn}"
-        session = HTMLSession()
-        r = session.get(data_url)
-        r.html.render(timeout=20)
-        session.close()
-        soup = bs4.BeautifulSoup(r.html.html, "html.parser")
+
+        # apt --fix-broken install
+        # sudo apt-get install chromium-chromedriver
+
+        chrome_options = Options()
+        options = [
+            "--headless",
+            "--disable-gpu",
+            "--window-size=1920,1200",
+            "--ignore-certificate-errors",
+            "--disable-extensions",
+            "--no-sandbox",
+            "--disable-dev-shm-usage"
+        ]
+        for option in options:
+            chrome_options.add_argument(option)
+
+
+        executable_path = "/usr/bin/chromedriver"
+        chrome_service = Service(executable_path)
+
+        driver = webdriver.Chrome(service=chrome_service,  options=chrome_options)
+        driver.get(data_url)
+
+
+        soup = bs4.BeautifulSoup(driver.page_source, "html.parser")
         collections = soup.find_all(attrs={"class": ["collectionsrow"]})
         collections.pop(0)
 
