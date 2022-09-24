@@ -4,6 +4,8 @@ import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+import logging
+import time
 
 
 @dataclass
@@ -37,6 +39,7 @@ class Api:
 
     def __init__(self, uprn) -> None:
         self.uprn = uprn
+        logging.info("Staring Bindicator API")
 
     def get_data(self):
         data_url = f"{self.url}{self.uprn}"
@@ -52,22 +55,29 @@ class Api:
             "--ignore-certificate-errors",
             "--disable-extensions",
             "--no-sandbox",
-            "--disable-dev-shm-usage"
+            "--disable-dev-shm-usage",
         ]
         for option in options:
             chrome_options.add_argument(option)
 
-
         executable_path = "/usr/bin/chromedriver"
         chrome_service = Service(executable_path)
 
-        driver = webdriver.Chrome(service=chrome_service,  options=chrome_options)
+        driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+        logging.info("Rendering webpage for collection data")
+        start = time.time()
         driver.get(data_url)
-
+        end = time.time()
+        logging.info(
+            f"Render and data collection took {round(((end-start) * 10**3)/1000,2)} seconds"
+        )
 
         soup = bs4.BeautifulSoup(driver.page_source, "html.parser")
         collections = soup.find_all(attrs={"class": ["collectionsrow"]})
         collections.pop(0)
+
+        if collections:
+            logging.info(f"Loaded Bin Collection Data for {self.uprn}")
 
         collection_data = []
         for collection in collections:
@@ -86,6 +96,8 @@ class Api:
         for data in filtered:
             day_data.append(CollectionDate(data[0], data[1]))
 
+        logging.info(f"{len(day_data)} Bin Collections Found")
+
         return day_data
 
     def __get_type(self, data):
@@ -94,6 +106,7 @@ class Api:
     def __get_date(self, data):
         raw_date = data[0].split("- ", 1)[1]
         return datetime.datetime.strptime(raw_date, "%d %b %Y").strftime("%d/%m/%Y")
+
 
 if __name__ == "__main__":
     import argparse
