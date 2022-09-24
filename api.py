@@ -1,6 +1,6 @@
 import bs4
 from dataclasses import dataclass
-import datetime
+from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -11,18 +11,18 @@ import time
 @dataclass
 class Collection:
 
-    type: str
-    date: str
+    bin_type: str
+    date: datetime
 
     def __init__(self, type, date) -> None:
-        self.type = type
-        self.date = date
+        self.bin_type = type
+        self.date = datetime.strptime(date, "%d/%m/%Y")
 
 
 @dataclass
 class CollectionDate:
 
-    date: str
+    date: datetime
     caddy: Collection
     wheelie: Collection
 
@@ -39,13 +39,10 @@ class Api:
 
     def __init__(self, uprn) -> None:
         self.uprn = uprn
-        logging.info("Staring Bindicator API")
+        logging.info("starting Bindicator API")
 
     def get_data(self):
         data_url = f"{self.url}{self.uprn}"
-
-        # apt --fix-broken install
-        # sudo apt-get install chromium-chromedriver
 
         chrome_options = Options()
         options = [
@@ -64,12 +61,12 @@ class Api:
         chrome_service = Service(executable_path)
 
         driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
-        logging.info("Rendering webpage for collection data")
+        logging.info("rendering webpage for collection data")
         start = time.time()
         driver.get(data_url)
         end = time.time()
         logging.info(
-            f"Render and data collection took {round(((end-start) * 10**3)/1000,2)} seconds"
+            f"render and data collection took {round(((end-start) * 10**3)/1000,2)} seconds"
         )
 
         soup = bs4.BeautifulSoup(driver.page_source, "html.parser")
@@ -77,7 +74,7 @@ class Api:
         collections.pop(0)
 
         if collections:
-            logging.info(f"Loaded Bin Collection Data for {self.uprn}")
+            logging.info(f"loaded bin collection data for {self.uprn}")
 
         collection_data = []
         for collection in collections:
@@ -96,7 +93,7 @@ class Api:
         for data in filtered:
             day_data.append(CollectionDate(data[0], data[1]))
 
-        logging.info(f"{len(day_data)} Bin Collections Found")
+        logging.info(f"{len(day_data)} bin collections found")
 
         return day_data
 
@@ -105,17 +102,13 @@ class Api:
 
     def __get_date(self, data):
         raw_date = data[0].split("- ", 1)[1]
-        return datetime.datetime.strptime(raw_date, "%d %b %Y").strftime("%d/%m/%Y")
+        return datetime.strptime(raw_date, "%d %b %Y").strftime("%d/%m/%Y")
 
 
 if __name__ == "__main__":
-    import argparse
+    from common import common_setup
 
-    parser = argparse.ArgumentParser(description="Get List of Bin Collections for UPRN")
-    parser.add_argument(
-        "--uprn", type=int, help="Unique Property Reference Number", required=True
-    )
-    args = parser.parse_args()
+    args = common_setup()
     api = Api(args.uprn)
     data = api.get_data()
     for collection in data:
