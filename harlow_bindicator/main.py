@@ -35,8 +35,7 @@ class Bindicator:
                     self.__configure_for_bin_day(collection)
                     logging.info(f"today is bin day for {self.bin_type}")
                 else:
-                    if self.bin_day:
-                        logging.info(f"today {datetime.now().date()} is not bin day")
+                    logging.info(f"today {datetime.now().date()} is not bin day")
                     self.__turn_lights_off()
                     self.bin_day = False
             else:
