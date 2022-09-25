@@ -2,7 +2,7 @@
 
 <div align="center">
   
-  [![GitHub](https://img.shields.io/github/license/joseph-mccarthy/harlow-bindicator?style=for-the-badge)](https://github.com/joseph-mccarthy/harlow-bindicator/blob/main/licence)
+  [![GitHub](https://img.shields.io/github/license/joseph-mccarthy/harlow-bindicator?style=for-the-badge)](https://github.com/joseph-mccarthy/harlow-bindicator/blob/main/LICENSE)
   [![wakatime](https://wakatime.com/badge/github/joseph-mccarthy/harlow-bindicator.svg?style=for-the-badge)](https://wakatime.com/badge/github/joseph-mccarthy/harlow-bindicator)
 
 </div>
