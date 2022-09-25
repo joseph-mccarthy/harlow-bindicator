@@ -72,7 +72,7 @@ In order to find the UPRN for your property there is a rather helpful website [_
 You're now ready to run the Harlow Bindicator Script, by entering the following command.
 
 ```bash
-python main.py --uprn YOUR_UPRN
+python harlow-bindicator/main.py --uprn YOUR_UPRN
 ```
 
 You should now start seeing output from the script to confirm that it's active. If you also followed the hardware guide, the activity light should also be flashing.
