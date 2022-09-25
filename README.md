@@ -21,7 +21,7 @@ They had some horrific embedded thing. Their implementation took firstly a postc
 * Recycling Bin LED to Pin __3__
 * Landfill Bin LED to Pin __4__
 
-_note: the food waste caddy has not been wired in as every week this is collected regardless of the wheelie bin being collected._
+_note: The food waste caddy has not been wired in as every week this is collected regardless of the wheelie bin being collected._
 
 ## Required Binaries
 
