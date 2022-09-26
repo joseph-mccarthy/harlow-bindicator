@@ -21,12 +21,9 @@ They had some horrific embedded thing. Their implementation took firstly a postc
 
 ## Hardware
 
-[__#1__](https://github.com/joseph-mccarthy/harlow-bindicator/issues/1) need to find a tool to create wire diagram.
+Below is a simplified wiring diagram for the LED's and resistors to have light output from the Harlow Bindicator. The Ground is connected to the Raspberry Pi __3.3__ Volt Ground. While the activity LED is connected to Pin __26__. The Bin Day LED is connected to Pin __2__. The Recycling Bin LED is connected to Pin __3__ and the Landfill Bin LED is connected to Pin __4__. If you don't want to have a flashing LED to indicate that the script is running, then just don't wire in the Activity LED.
 
-* Activty LED to Pin __26__
-* Bin Day LED to Pin __2__
-* Recycling Bin LED to Pin __3__
-* Landfill Bin LED to Pin __4__
+![Image alt text](pinout.png)
 
 _note: The food waste caddy has not been wired in as every week this is collected regardless of the wheelie bin being collected._
 
