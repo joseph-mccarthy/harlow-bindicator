@@ -10,6 +10,8 @@ def common_setup():
         "--log", type=str, required=False, help="Log Level", default=logging.INFO
     )
 
+    parser.add_argument('--phone_numbers', type=str, nargs='+')
+    
     args = parser.parse_args()
 
     logging.basicConfig(
