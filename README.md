@@ -7,6 +7,9 @@
 
 </div>
 
+
+![Project Image](banner.png)
+
 A simple Raspberry Pi project that checks the [__Harlow Council__](https://www.harlow.gov.uk/) website for the bin collection day and bin type of a given property. If the current day is bin day then light up the correct LED for the given bin type.
 
 ## Problem
