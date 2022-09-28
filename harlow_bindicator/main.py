@@ -55,7 +55,7 @@ class Bindicator:
                 continue  
           
             tomorrow = (datetime.now() + timedelta(days=1)).replace(
-                hour=1, minute=10, second=0, microsecond=0
+                hour=6, minute=10, second=0, microsecond=0
             )
             logging.info(f"waiting till {tomorrow} to run again")
             pause.until(tomorrow)
