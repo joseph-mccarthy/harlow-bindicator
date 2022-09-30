@@ -8,7 +8,7 @@ def common_setup():
         "--uprn", type=int, help="Unique Property Reference Number",
     )
     parser.add_argument(
-        "--log", type=str, required=False, help="Log Level", default=logging.INFO
+        "--log", type=str, required=False, help="Log Level", default=logging.WARN
     )
 
     parser.add_argument('--phone_numbers', type=str, nargs='+')

@@ -27,7 +27,7 @@ class Bindicator:
         self.uprn = uprn
         self.phone_numbers = phone_numbers
         self.api = Api(uprn)
-        logging.info(f"running Bindicator for property {self.uprn}")
+        logging.warning(f"running Bindicator for property {self.uprn}")
         if phone_numbers:
             logging.info(f"On bin day will send notification to {self.phone_numbers}.")
 
@@ -40,7 +40,7 @@ class Bindicator:
                 collection = collections[0]
                 if self.__is_today_bin_day(collection):
                     self.__configure_for_bin_day(collection)
-                    logging.info(f"today is bin day for {self.bin_type}")
+                    logging.warning(f"today is bin day for {self.bin_type}")
                     if self.phone_numbers:
                         logging.info("Attempting to send notifications")
                         twilio = Twilio(self.phone_numbers)

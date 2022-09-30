@@ -15,7 +15,7 @@ class Twilio:
 
     def send_notification(self, collection: Collection)-> None:
         for number in self.phone_numbers:
-            logging.info(f"sending notification to {number}")
+            logging.warning(f"sending notification to {number}")
             self.client.messages.create(  
                               messaging_service_sid='MGd0c0fc1bc9c073ace756d6549c2e1b03', 
                               body=f"Take out the {collection.bin_type} today.",      
