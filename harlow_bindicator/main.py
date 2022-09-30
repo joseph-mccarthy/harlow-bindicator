@@ -43,7 +43,7 @@ class Bindicator:
                     logging.info(f"today is bin day for {self.bin_type}")
                     if self.phone_numbers:
                         logging.info("Attempting to send notifications")
-                        twilio = Twilio()
+                        twilio = Twilio(self.phone_numbers)
                         twilio.send_notification(collection.wheelie)
 
                 else:
