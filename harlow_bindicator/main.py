@@ -29,7 +29,7 @@ class Bindicator:
         self.api = Api(uprn)
         logging.warning(f"running Bindicator for property {self.uprn}")
         if phone_numbers:
-            logging.info(f"On bin day will send notification to {self.phone_numbers}.")
+            logging.info(f"nn bin day will send notification to {self.phone_numbers}.")
 
     def run(self):
         self.active_led.blink()
@@ -42,12 +42,12 @@ class Bindicator:
                     self.__configure_for_bin_day(collection)
                     logging.warning(f"today is bin day for {self.bin_type}")
                     if self.phone_numbers:
-                        logging.info("Attempting to send notifications")
+                        logging.info("attempting to send notifications")
                         twilio = Twilio(self.phone_numbers)
                         twilio.send_notification(collection.wheelie)
 
                 else:
-                    logging.info(f"today {datetime.now().date()} is not bin day")
+                    logging.warning(f"today {datetime.now().date()} is not bin day")
                     self.__turn_lights_off()
                     self.bin_day = False
             else:
@@ -83,6 +83,6 @@ class Bindicator:
 
 if __name__ == "__main__":
     args = common_setup()
-    logging.info("starting Harlow Bindicator")
+    logging.warning("starting Harlow Bindicator")
     bindicator = Bindicator(args.uprn,args.phone_numbers)
     bindicator.run()

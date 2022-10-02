@@ -22,10 +22,10 @@ def common_setup():
     )
 
     if not args.uprn:
-        logging.warn("No UPRN provided checking system variables.")
+        logging.warn("no UPRN provided checking system variables.")
         args.uprn = os.getenv('UPRN')
         if not args.uprn:
-            logging.error("Exiting no UPRN provided unable to proceed.")
+            logging.error("exiting no UPRN provided unable to proceed.")
             exit(1)
 
     return args
