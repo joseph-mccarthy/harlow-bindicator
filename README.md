@@ -36,7 +36,7 @@ On the Raspberry Pi terminal run the following:
 ```bash
 sudo apt-get update
 sudo apt-get install chromium-browser
-sudo apt-get install chromuim-chromedriver
+sudo apt-get install chromium-chromedriver
 ```
 
 Running the above will update the distribution lists, then install the chromium browser and then the correct chrome driver. To ensure that the above steps have completed enter the following and check that both __chromediver__ and __chromium_browser__ are present.
