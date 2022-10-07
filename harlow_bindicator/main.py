@@ -23,13 +23,16 @@ class Bindicator:
 
         if collections:
             next_collection = collections[0]
-            is_bin_day = self.__is_today_bin_day(next_collection)
-            payload = json.dumps({
-                "date": next_collection.date.strftime("%d/%m/%Y"),
-                "bin_day": is_bin_day,
-                "bin_type": next_collection.wheelie.bin_type
-            })
-            self.__send_message(payload)
+            self.__send_message(self.__create_message(next_collection))
+
+    def __create_message(self,collection):
+        is_bin_day = self.__is_today_bin_day(collection)
+        payload = json.dumps({
+            "date": collection.date.strftime("%d/%m/%Y"),
+            "bin_day": is_bin_day,
+            "bin_type": collection.wheelie.bin_type
+        })
+        return payload
 
     def __send_message(self, payload):
         broker = "broker"
